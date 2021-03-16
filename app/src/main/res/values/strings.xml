@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Joc Trivia</string>
+    <string name="title">Trivia</string>
+    <string name="true_title">TRUE</string>
+    <string name="false_title">FALSE</string>
+    <string name="next_button">next_button</string>
+    <string name="previous_button">previous_button</string>
+    <string name="counter_questions">No of question</string>
+    <string name="textview">TextView</string>
+    <string name="correct_answer">Correct</string>
+    <string name="wrong_answer">Wrong</string>
+    <string name="text_score">score</string>
+    <string name="highest_score">Highest score</string>
+</resources>
