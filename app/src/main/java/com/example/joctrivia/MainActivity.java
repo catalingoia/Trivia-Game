@@ -25,6 +25,7 @@ import com.example.joctrivia.util.Prefs;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView questionTextView;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageButton prevButton = findViewById(R.id.prev_button);
         Button trueButton = findViewById(R.id.true_button);
         Button falseButton = findViewById(R.id.false_button);
+        Button resetButton = findViewById(R.id.reset_button);
         questionCounterTextView = findViewById(R.id.counter_text);
         questionTextView = findViewById(R.id.question_textview);
 
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prevButton.setOnClickListener(this);
         trueButton.setOnClickListener(this);
         falseButton.setOnClickListener(this);
-
+        resetButton.setOnClickListener(this);
         scoreTextView.setText(MessageFormat.format("Current Score : {0} ", String.valueOf(score.getScore())));
 
         currentQuestionIndex = prefs.getState();
@@ -83,11 +85,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
     }
 
     @Override
     public void onClick(View view) {
+
+
         final Button trueButton = findViewById(R.id.true_button);
         final Button falseButton = findViewById(R.id.false_button);
         trueButton.setClickable(false);
@@ -100,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 falseButton.setClickable(true);
             }
         }, 700);
+
+
         switch (view.getId()){
             case R.id.prev_button:
                 if(currentQuestionIndex > 0) {
@@ -118,7 +123,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 checkAnswer(false);
                 updateQuestion();
                 break;
+            case R.id.reset_button:
+                resetScore();
+                break;
         }
+
+    }
+
+    private void resetScore() {
+        scoreCounter = 0;
+        score.setScore(scoreCounter);
+        scoreTextView.setText(MessageFormat.format("Current Score : {0} ", String.valueOf(score.getScore())));
 
     }
 
@@ -183,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                cardView.setCardBackgroundColor(Color.WHITE);
+                cardView.setCardBackgroundColor(Color.argb(230,255,255,255));
                 goNext();
             }
 
@@ -207,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                cardView.setBackgroundColor(Color.WHITE);
+                cardView.setBackgroundColor(Color.argb(230,255,255,255));
                 goNext();
 
             }
